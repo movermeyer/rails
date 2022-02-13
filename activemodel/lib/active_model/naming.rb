@@ -197,11 +197,11 @@ module ActiveModel
     def human(options = {})
       return @human if i18n_keys.empty? || i18n_scope.empty?
 
-      key, *defaults = i18n_keys
+      defaults = i18n_keys
       defaults << options[:default] if options[:default]
       defaults << MISSING_TRANSLATION
 
-      translation = I18n.translate(key, scope: i18n_scope, count: 1, **options, default: defaults)
+      translation = I18n.translate(defaults.first, scope: i18n_scope, count: 1, **options, default: defaults)
       translation = @human if translation == MISSING_TRANSLATION
       translation
     end
